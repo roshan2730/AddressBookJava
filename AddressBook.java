@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 public class AddressBook {
     HashMap <String, Person> personList = new HashMap<String, Person>();
+    List <Person> valueList=new ArrayList<Person>(personList.values());
     Scanner scanner = new Scanner(System.in);
 
     public Person getDetailsFromUser()
@@ -156,13 +157,27 @@ public class AddressBook {
         System.out.println(filteredCountContact);
     }
 
-    public void sortContactsByFName()
+    public void sortByFName()
     {
-        List <Person> valueList=new ArrayList<Person>(personList.values());
-
         valueList.sort((Person m1, Person m2)->m1.getfName().compareTo(m2.getfName()));
         valueList.forEach((m)->System.out.println(m));
     }
+
+    public void sortByCity() {
+        valueList.sort((Person obj1, Person obj2) -> obj1.getCity().compareTo(obj2.getCity()));
+        valueList.forEach((sortedContact) -> System.out.println(sortedContact));
+    }
+
+    public void sortByState() {
+        valueList.sort((Person obj1, Person obj2) -> obj1.getState().compareTo(obj2.getState()));
+        valueList.forEach((sortedContact) -> System.out.println(sortedContact));
+    }
+
+    public void sortByZipCode() {
+        valueList.sort((Person obj1, Person obj2) -> obj1.getZip() - obj2.getZip());
+        valueList.forEach((sortedList) -> System.out.println(sortedList));
+    }
+
 
     public void getUserChoice()
     {
@@ -198,7 +213,18 @@ public class AddressBook {
                     countByCityOrState();
                     break;
                 case 7:
-                    sortContactsByFName();
+                    sortByFName();
+                    break;
+                case 8:
+                    sortByState();
+                    break;
+
+                case 9:
+                    sortByCity();
+                    break;
+
+                case 10:
+                    sortByZipCode();
                     break;
                 case 0:
                     System.exit(0);
